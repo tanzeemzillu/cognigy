@@ -4,8 +4,11 @@ This document will explain the architecture of the infrastructure what have been
 
 1. Architecture
 2. Explanation of the Architechture
-..* Networking
-..* Nodes
+  1. Networking
+  2. Nodes
+  3. Security groups
+    1. Inbound
+    2. Outbound 
 
 ## Architecture
 
@@ -60,3 +63,31 @@ Subnet 3 will have the db node only where the mongodb will run. The details of t
 | db        | t2.xlarge   |1000 GB, SSD |192.168.2.1 |            | 
 
 This subnet is a private subnet and has no connection outside of the VPC. Also it requires fast disk so 1000 GB, SSD has been used which has very high IO. 
+
+### Security groups
+
+The security groups for all nodes will be as below
+
+#### Outbound
+
+| Destination | Protocol | Port range |
+|-------------|----------|------------|
+| 0.0.0.0/0   |	  All    | 	  All     |
+
+#### Inbound
+
+| Destination | Protocol | Port range |
+|-------------|----------|------------|
+| 0.0.0.0/0   |	  TCP    | 	  2376    |
+| 0.0.0.0/0   |	  TCP    | 	  2377    |
+| 0.0.0.0/0   |	  TCP/UDP| 	  7946    |
+| 0.0.0.0/0   |	  UDP    | 	  4789    |
+| 0.0.0.0/0   |	  SSH    | 	   22     |
+| 0.0.0.0/0   |	  HTTP   | 	   80     |
+| 0.0.0.0/0   |	  TCP    | 	  5000    |
+| 0.0.0.0/0   |	  TCP    | 	  4000    |
+| 0.0.0.0/0   |	  TCP    | 	  27017   |
+
+> Please note here I consider to create a docker swarm cluster
+
+port 2376, 2377, 7946 and 4789 is required to create cluster. I also allowed SSH and HTTP port. Rest of the ports are opened for the necessary microservices. 
