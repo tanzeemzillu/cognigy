@@ -1,6 +1,6 @@
 # Infrastructure(task 1)
 
-This document will explain the architecture of the infrastructure what have been plannned. This document will cover the following topic
+This document will explain the architecture of the infrastructure which has been planned. This document will cover the following topic
 
 1. Architecture
 2. Explanation of the Architechture

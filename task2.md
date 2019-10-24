@@ -175,7 +175,7 @@ secrets:
 > please note, here the repo which name started with `cognigy` is considered as artificial public repo.
 > All the placeholder's value are defined in .env file. 
 
-The services (api and user-management) which required connection with mongodb, there the password of mongodb user has passed via `docker-secret` for security. The resources has been restricted according to the given requirements. 
+The services (api and user-management) which required connection with mongodb, there the password of mongodb user has been passed via `docker-secret` for security. The resources has been restricted according to the given requirements. 
 
 As explained in task1, I want to deploy the `nginx` and `mongo` in the nodes which labled as `lb` and `db` respectively. The rest of the services should deploy on the nodes which are labled as `app`.To lable the node `docker lable` functionality can be used. For proper distribution placement constraint has been used. For example, in this docker-compose file for nginx the following placement has been used 
 
@@ -189,7 +189,7 @@ As explained in task1, I want to deploy the `nginx` and `mongo` in the nodes whi
 ```      
 So nginx will only deploy on `lb` labled node. This is similar in other services as well. 
 
-To speared the the containers in different zones a `zone` lable has been used, where the value for zone will be `A` for the components of A zone and `B` for the components of B zone.Here `spread` option has been used as preference. This has not been used for mongo service because according to infrastructure drawing db will be deployed on zone `C` only. 
+To distribute the containers in different zones a `zone` lable has been used, where the value for zone will be `A` for the components of A zone and `B` for the components of B zone.Here `spread` option has been used as preference. This has not been used for mongo service because according to infrastructure drawing db will be deployed on zone `C` only. 
 
 **api** service has a access to user-management service using `link` option and it has been exposed over `5000`port. The HTTP access for this service(which in this case `192.168.0.1:5000` or `192.168.1.1:5000`) will be configured as a backend in nginx so user can access the service via HTTP proxy. This service will come up after `mongo` and `user-management` service as it has dependency on it. 
 
@@ -199,4 +199,4 @@ To speared the the containers in different zones a `zone` lable has been used, w
 
 **mongo** service has a docker volume mount as per requirements.  
 
-**nginx** service also have a volume mount to get the nginx configuration and `docker secret` has used to get the TLS certificate. 
+**nginx** service also have a volume mount to get the nginx configuration and `docker secret` has been used to transfer the TLS certificate in a secure way. 
