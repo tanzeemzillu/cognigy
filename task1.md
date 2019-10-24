@@ -4,11 +4,11 @@ This document will explain the architecture of the infrastructure what have been
 
 1. Architecture
 2. Explanation of the Architechture
-  1. Networking
-  2. Nodes
-  3. Security groups
-    1. Inbound
-    2. Outbound 
+3. Networking
+4. Nodes
+5. Security groups
+6. Inbound
+7. Outbound 
 
 ## Architecture
 
@@ -54,7 +54,7 @@ The reason to pick the t2.xlarge for the app node as to run the software it requ
 
 For the load balancer(nginx) very high resource is not needed so t2.medium and  100 GB, HDD has been used.
 
-The reason to have the app and lb nodes in multiple zones is high availablity. So that even if a zone go down we will have no downtime.
+The reason to have the app and lb nodes in multiple zones is high availability. So that even if a zone go down we won't have any downtime.
 
 Subnet 3 will have the db node only where the mongodb will run. The details of this node is 
 
