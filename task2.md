@@ -191,11 +191,11 @@ So nginx will only deploy on `lb` labled node. This is similar in other services
 
 To speared the the containers in different zones a `zone` lable has been used, where the value for zone will be `A` for the components of A zone and `B` for the components of B zone.Here `spread` option has been used as preference. This has not been used for mongo service because according to infrastructure drawing db will be deployed on zone `C` only. 
 
-**api** service has a access to user-management service using `link` option and it has been exposed over `5000`port. The HTTP access for this service(which in this case 192.168.0.1:5000 or 192.168.1.1:5000) will be configured as a backend in nginx so user can access the service via HTTP proxy. This service will come up after `mongo` and `user-management` service as it has dependency on it. 
+**api** service has a access to user-management service using `link` option and it has been exposed over `5000`port. The HTTP access for this service(which in this case `192.168.0.1:5000` or `192.168.1.1:5000`) will be configured as a backend in nginx so user can access the service via HTTP proxy. This service will come up after `mongo` and `user-management` service as it has dependency on it. 
 
 **user-management** service has not been exposed to the outside and it has access to the `mongo` as well.
 
-**web-frontend** service is exposed over `4000` and it can also accessed via HTTP proxy. This service has no connection with mongodb. 
+**web-frontend** service is exposed over `4000` and it can also accessed via HTTP proxy(Similar to the API service. In this case `192.168.0.1:5000` or `192.168.1.1:5000` will be configured as backed in nginx). This service has no connection with mongodb. 
 
 **mongo** service has a docker volume mount as per requirements.  
 
