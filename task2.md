@@ -135,6 +135,8 @@ services:
     restart: always
     ports:
     - "27017:27017"
+    networks:
+      - db
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DB_USER}
       MONGO_INITDB_ROOT_PASSWORD: run/secrets/mongo-pass
@@ -149,7 +151,7 @@ services:
       - mongo-pass
 
   nginx:
-    image: nginx
+    image: nginx:1.17
     ports: 
       - "80:80"
       - "443:443"
@@ -171,6 +173,10 @@ secrets:
     external: true
   app.cert:
     file: /cert/app.cert
+
+networks:
+  db:
+    external: true
 ``` 
 > please note, here the repo which name started with `cognigy` is considered as artificial public repo.
 > All the placeholder's value are defined in .env file. 
